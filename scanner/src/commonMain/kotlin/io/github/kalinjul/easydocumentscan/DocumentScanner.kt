@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 
 @Composable
 expect fun rememberDocumentScanner(
-    onScanned: (String) -> Unit
+    onResult: (List<KmpImage>) -> Unit
 ): DocumentScanner
 
 interface DocumentScanner {

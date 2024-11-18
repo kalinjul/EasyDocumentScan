@@ -1,7 +1,7 @@
 [versions]
-compileSdk = "34"
-targetSdk = "34"
-minSdk = "21"
+compileSdk = "35"
+targetSdk = "35"
+minSdk = "24" # required for exif interface
 
 jvmTarget = "17"
 # https://developer.android.com/build/releases/gradle-plugin#compatibility
@@ -24,8 +24,6 @@ coreKtx = "1.13.1"
 
 dokka = "1.9.10"
 nexus-publish-plugin = "1.3.0"
-accompanist = "0.34.0"
-androidxCamera = "1.3.4"
 mlkit-document-scanner = "16.0.0-beta1"
 
 [libraries]
