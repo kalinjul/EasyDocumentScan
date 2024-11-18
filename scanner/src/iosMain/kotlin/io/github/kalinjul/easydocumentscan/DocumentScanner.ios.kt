@@ -13,7 +13,8 @@ import platform.VisionKit.VNDocumentCameraViewController
 
 @Composable
 actual fun rememberDocumentScanner(
-    onResult: (List<KmpImage>) -> Unit
+    onResult: (List<KmpImage>) -> Unit,
+    options: DocumentScannerOptions
 ): DocumentScanner {
 
     val localViewController = LocalUIViewController.current

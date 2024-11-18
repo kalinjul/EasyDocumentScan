@@ -15,17 +15,23 @@ import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
 
 @Composable
 actual fun rememberDocumentScanner(
-    onResult: (List<KmpImage>) -> Unit
+    onResult: (List<KmpImage>) -> Unit,
+    options: DocumentScannerOptions
 ): DocumentScanner {
     val context = LocalContext.current
 
     val options = remember {
+        val scannerMode = when (options.android.scannerMode) {
+            DocumentScannerModeAndroid.FULL -> GmsDocumentScannerOptions.SCANNER_MODE_FULL
+            DocumentScannerModeAndroid.BASE_WITH_FILTER -> GmsDocumentScannerOptions.SCANNER_MODE_BASE_WITH_FILTER
+            DocumentScannerModeAndroid.BASE -> GmsDocumentScannerOptions.SCANNER_MODE_BASE
+        }
+
         GmsDocumentScannerOptions.Builder()
-            .setScannerMode(GmsDocumentScannerOptions.SCANNER_MODE_BASE)
-            .setResultFormats(GmsDocumentScannerOptions.RESULT_FORMAT_JPEG) // PDF format not supported on ios
-            .setGalleryImportAllowed(false)
-            .setScannerMode(GmsDocumentScannerOptions.SCANNER_MODE_BASE_WITH_FILTER)
-            .setPageLimit(3)
+            .setResultFormats(GmsDocumentScannerOptions.RESULT_FORMAT_JPEG) // PDF format not supported on ios, so disable in android, too
+            .setGalleryImportAllowed(options.android.allowGalleryImport)
+            .setScannerMode(scannerMode)
+            .setPageLimit(options.android.pageLimit)
             .build()
     }
 

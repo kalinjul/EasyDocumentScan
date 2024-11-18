@@ -22,6 +22,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.unit.dp
+import io.github.kalinjul.easydocumentscan.DocumentScannerOptions
+import io.github.kalinjul.easydocumentscan.DocumentScannerOptionsAndroid
 import io.github.kalinjul.easydocumentscan.KmpImage
 import io.github.kalinjul.easydocumentscan.rememberDocumentScanner
 import kotlinx.coroutines.launch
@@ -41,12 +43,23 @@ fun MainView() {
         Column() {
             Text("Document Scanner demo")
             val scope = rememberCoroutineScope()
-            val scanner = rememberDocumentScanner(onResult = {
-                images = it
-                scope.launch {
-                    snackbarHostState.showSnackbar("${it.size} documents scanned", duration = SnackbarDuration.Short)
-                }
-            })
+            val scanner = rememberDocumentScanner(
+                onResult = {
+                    images = it
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            "${it.size} documents scanned",
+                            duration = SnackbarDuration.Short
+                        )
+                    }
+                },
+                options = DocumentScannerOptions(
+                    DocumentScannerOptionsAndroid(
+                        pageLimit = 2,
+                        allowGalleryImport = true
+                    )
+                )
+            )
             Button(onClick = {
                 scanner.scan()
             }) {
