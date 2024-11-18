@@ -15,12 +15,14 @@ import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
 
 @Composable
 actual fun rememberDocumentScanner(
-    onScanned: (String) -> Unit
+    onResult: (List<KmpImage>) -> Unit
 ): DocumentScanner {
+    val context = LocalContext.current
+
     val options = remember {
         GmsDocumentScannerOptions.Builder()
             .setScannerMode(GmsDocumentScannerOptions.SCANNER_MODE_BASE)
-            .setResultFormats(GmsDocumentScannerOptions.RESULT_FORMAT_PDF, GmsDocumentScannerOptions.RESULT_FORMAT_JPEG)
+            .setResultFormats(GmsDocumentScannerOptions.RESULT_FORMAT_JPEG) // PDF format not supported on ios
             .setGalleryImportAllowed(false)
             .setScannerMode(GmsDocumentScannerOptions.SCANNER_MODE_BASE_WITH_FILTER)
             .setPageLimit(3)
@@ -35,20 +37,20 @@ actual fun rememberDocumentScanner(
         if (result.resultCode == RESULT_OK) {
             val gmsResult = GmsDocumentScanningResult.fromActivityResultIntent(result.data)
             gmsResult?.pages?.let { pages ->
-                pages.forEach { page ->
-                    val imageUri = page.imageUri
-                    println("Image: $imageUri")
+                println("result: $pages")
+                val images = pages.map {
+                    AndroidImage(platformFile = it.imageUri, type = "jpeg", contentResolver = context.contentResolver)
                 }
+                onResult(images)
             }
-            gmsResult?.pdf?.let { pdf ->
-                val pdfUri = pdf.uri
-                println("PDF: $pdfUri")
-                onScanned(pdfUri.toString())
-            }
+
+//            gmsResult?.pdf?.let { pdf ->
+//                val pdfUri = pdf.uri
+//                println("PDF: $pdfUri")
+//                onScanned(pdfUri.toString())
+//            }
         }
     }
-
-    val context = LocalContext.current
 
     val documentScanner = remember(gmsScanner, scannerLauncher, context) {
         object: DocumentScanner {
