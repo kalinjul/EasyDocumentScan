@@ -17,7 +17,7 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.material3)
 
-                implementation(projects.scanner)
+                implementation(projects.documentscanner)
             }
         }
         val androidMain by getting {
