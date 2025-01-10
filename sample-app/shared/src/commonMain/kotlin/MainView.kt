@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.unit.dp
+import io.github.kalinjul.easydocumentscan.DocumentScannerModeAndroid
 import io.github.kalinjul.easydocumentscan.DocumentScannerOptions
 import io.github.kalinjul.easydocumentscan.DocumentScannerOptionsAndroid
 import io.github.kalinjul.easydocumentscan.KmpImage
@@ -55,8 +56,9 @@ fun MainView() {
                 },
                 options = DocumentScannerOptions(
                     DocumentScannerOptionsAndroid(
-                        pageLimit = 2,
-                        allowGalleryImport = true
+                        pageLimit = 3,
+                        allowGalleryImport = true,
+                        scannerMode = DocumentScannerModeAndroid.BASE
                     )
                 )
             )
