@@ -7,7 +7,7 @@ plugins {
     id("io.github.kalinjul.convention.compose.multiplatform")
 }
 
-description = "Compose Multiplatform Document Code Scanner for Android/iOS"
+description = "Compose Multiplatform Document Scanner for Android/iOS"
 
 kotlin {
     configureIosTargets()
