@@ -10,23 +10,45 @@ Document Scanner for Compose Multiplatform (Android/iOS) using [VNDocumentCamera
 
 Supported Compose version:
 
- | Compose version | EasyDocumentScan Version |
+| Compose version | EasyDocumentScan Version |
 |-----------------|--------------------------|
 | 1.7             | 0.1.0+                   |
+| 1.8             | 0.2.0+                   |
 
 # Dependency
 Add the dependency to your commonMain sourceSet (KMP) / Android dependencies (android only):
 ```kotlin
-implementation("io.github.kalinjul.easydocumentscan:documentscanner:0.1.0")
+implementation("io.github.kalinjul.easydocumentscan:documentscanner:0.2.0")
 ```
 
 Or, for your libs.versions.toml:
 ```toml
 [versions]
-easydocumentscan = "0.1.0"
+easydocumentscan = "0.2.0"
 [libraries]
 easydocumentscan = { module = "io.github.kalinjul.easydocumentscan:documentscanner", version.ref = "easydocumentscan" }
 ```
 
 # Usage
-TODO
+```kotlin
+val scanner = rememberDocumentScanner(
+ onResult = {
+     // handle result images
+ },
+ options = DocumentScannerOptions(
+     DocumentScannerOptionsAndroid(
+         pageLimit = 3,
+         allowGalleryImport = true,
+         scannerMode = DocumentScannerModeAndroid.BASE
+     ),
+     DocumentScannerOptionsIos(
+         captureMode = DocumentCaptureMode.MANUAL
+     )
+ )
+ )
+ Button(onClick = { scanner.scan() }) {
+     Text("Scan")
+ }
+```
+
+Check out the included sample app.
