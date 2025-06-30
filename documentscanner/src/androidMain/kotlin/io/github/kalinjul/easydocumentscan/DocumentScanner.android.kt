@@ -15,7 +15,7 @@ import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
 
 @Composable
 actual fun rememberDocumentScanner(
-    onResult: (List<KmpImage>) -> Unit,
+    onResult: (Result<List<KmpImage>>) -> Unit,
     options: DocumentScannerOptions
 ): DocumentScanner {
     val context = LocalContext.current
@@ -43,11 +43,10 @@ actual fun rememberDocumentScanner(
         if (result.resultCode == RESULT_OK) {
             val gmsResult = GmsDocumentScanningResult.fromActivityResultIntent(result.data)
             gmsResult?.pages?.let { pages ->
-                println("result: $pages")
                 val images = pages.map {
                     AndroidImage(platformFile = it.imageUri, type = "jpeg", contentResolver = context.contentResolver)
                 }
-                onResult(images)
+                onResult(Result.success(images))
             }
 
 //            gmsResult?.pdf?.let { pdf ->

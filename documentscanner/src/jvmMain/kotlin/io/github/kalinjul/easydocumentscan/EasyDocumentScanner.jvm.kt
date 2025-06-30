@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 
 @Composable
 actual fun rememberDocumentScanner(
-    onResult: (List<KmpImage>) -> Unit,
+    onResult: (Result<List<KmpImage>>) -> Unit,
     options: DocumentScannerOptions
 ): DocumentScanner {
     return object: DocumentScanner {

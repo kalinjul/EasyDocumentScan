@@ -15,7 +15,7 @@ import platform.VisionKit.VNDocumentCameraViewController
 
 @Composable
 actual fun rememberDocumentScanner(
-    onResult: (List<KmpImage>) -> Unit,
+    onResult: (Result<List<KmpImage>>) -> Unit,
     options: DocumentScannerOptions
 ): DocumentScanner {
 
@@ -29,19 +29,17 @@ actual fun rememberDocumentScanner(
             controller.setDelegate(
                 DocumentScannerDelegate(
                     onError = {
-                        println("delegate: onerror")
                         controller.dismissViewControllerAnimated(true) {}
-                        when(it.code) {
-                            AVErrorApplicationIsNotAuthorizedToUseDevice -> throw DocumentScannerException.NotAuthorized(it.localizedDescription)
-                            else -> throw DocumentScannerException.Unknown(it.localizedDescription)
+                        val exception = when(it.code) {
+                            AVErrorApplicationIsNotAuthorizedToUseDevice -> DocumentScannerException.NotAuthorized(it.localizedDescription)
+                            else -> DocumentScannerException.Unknown(it.localizedDescription)
                         }
+                        onResult(Result.failure(exception))
                     },
                     onCancel = {
-                        println("delegate: oncancel")
                         controller.dismissViewControllerAnimated(true) {}
                     },
                     onResult = { result ->
-                        println("delegate: onResult")
                         controller.dismissViewControllerAnimated(true) {}
 
                         val documents = (0..< result.pageCount.toInt()).map {
@@ -49,7 +47,7 @@ actual fun rememberDocumentScanner(
                             IosImage(image)
                         }
 
-                        onResult(documents)
+                        onResult(Result.success(documents))
                     }
                 ).also {
                     delegate = it // need to remember delegate else it is dereferenced
