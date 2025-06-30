@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.interop.LocalUIViewController
+import platform.AVFoundation.AVErrorApplicationIsNotAuthorizedToUseDevice
 import platform.UIKit.UIButton
 import platform.UIKit.UIControlEventTouchUpInside
 import platform.UIKit.UILabel
@@ -30,7 +31,10 @@ actual fun rememberDocumentScanner(
                     onError = {
                         println("delegate: onerror")
                         controller.dismissViewControllerAnimated(true) {}
-                        throw DocumentScannerException(it.localizedDescription)
+                        when(it.code) {
+                            AVErrorApplicationIsNotAuthorizedToUseDevice -> throw DocumentScannerException.NotAuthorized(it.localizedDescription)
+                            else -> throw DocumentScannerException.Unknown(it.localizedDescription)
+                        }
                     },
                     onCancel = {
                         println("delegate: oncancel")
@@ -52,13 +56,9 @@ actual fun rememberDocumentScanner(
                 }
             )
             localViewController.presentViewController(controller, animated = true) {
-
-
                 if (options.ios.captureMode == DocumentCaptureMode.MANUAL) {
                     controller.setManualMode()
                 }
-
-
             }
         }
 

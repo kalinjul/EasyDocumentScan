@@ -1,3 +1,6 @@
 package io.github.kalinjul.easydocumentscan
 
-class DocumentScannerException(message: String): Exception(message)
+sealed class DocumentScannerException(message: String): Exception(message) {
+    data class NotAuthorized(override val message: String): DocumentScannerException(message = message)
+    data class Unknown(override val message: String): DocumentScannerException(message = message)
+}
