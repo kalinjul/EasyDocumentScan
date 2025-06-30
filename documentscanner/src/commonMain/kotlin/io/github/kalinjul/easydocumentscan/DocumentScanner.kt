@@ -4,12 +4,11 @@ import androidx.compose.runtime.Composable
 
 @Composable
 expect fun rememberDocumentScanner(
-    onResult: (List<KmpImage>) -> Unit,
+    onResult: (Result<List<KmpImage>>) -> Unit,
     options: DocumentScannerOptions = DocumentScannerOptions(DocumentScannerOptionsAndroid(), DocumentScannerOptionsIos())
 ): DocumentScanner
 
 interface DocumentScanner {
-    @Throws(DocumentScannerException::class)
     fun scan()
 }
 

@@ -51,12 +51,16 @@ fun MainView() {
             val scope = rememberCoroutineScope()
             val scanner = rememberDocumentScanner(
                 onResult = {
-                    images = it
-                    scope.launch {
-                        snackbarHostState.showSnackbar(
-                            "${it.size} documents scanned",
-                            duration = SnackbarDuration.Short
-                        )
+                    if (it.isSuccess) {
+                        images = it.getOrThrow()
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                "${images.size} documents scanned",
+                                duration = SnackbarDuration.Short
+                            )
+                        }
+                    } else {
+                        println(it.exceptionOrNull())
                     }
                 },
                 options = DocumentScannerOptions(
