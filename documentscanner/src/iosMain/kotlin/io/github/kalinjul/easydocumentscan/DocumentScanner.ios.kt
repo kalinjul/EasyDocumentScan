@@ -5,7 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.interop.LocalUIViewController
+import androidx.compose.ui.uikit.LocalUIViewController
 import platform.AVFoundation.AVErrorApplicationIsNotAuthorizedToUseDevice
 import platform.UIKit.UIButton
 import platform.UIKit.UIControlEventTouchUpInside
@@ -61,19 +61,6 @@ actual fun rememberDocumentScanner(
         }
 
         private fun VNDocumentCameraViewController.setManualMode() {
-//                val buttons = controller.view.findChildren { it is UIButton }
-//                buttons.forEach {
-//                    println("${it.accessibilityLabel} ${it}")
-//                    it.findChildren { true }.forEach {
-//                        if (it is UILabel) {
-//                            println("  ${it.text} ${it.accessibilityLabel} $it")
-//                            if (it.text == "Auto") {
-//                                println("Found Auto button")
-//                            }
-//                        }
-//                    }
-//                }
-
             val autoButton = view.findChild {
                 it.hasChild {
                     val text = (it as? UILabel)?.text
@@ -81,19 +68,6 @@ actual fun rememberDocumentScanner(
                 } != null
             }
             (autoButton as? UIButton)?.sendActionsForControlEvents(UIControlEventTouchUpInside)
-
-//            var view = autoButton
-//            println("View hierarchy:")
-//            while(view != null) {
-//                println(view)
-//                view = view.superview
-//            }
-
-//            val navigationbar = navigationController?.navigationBar
-//            println("Navigationbar: $navigationbar")
-//                buttons.find { it.accessibilityLabel?.contains("Filtereinstellungen") == true }?.removeFromSuperview()
-//                val imageViews = controller.view.findChildren { it is UIImageView }
-//                imageViews.forEach { it.removeFromSuperview() }
         }
     }
 }
