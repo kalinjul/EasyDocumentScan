@@ -4,8 +4,8 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import io.github.kalinjul.convention.config.configureAndroidTarget
 import io.github.kalinjul.convention.config.configureKotlin
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 /**
  * No JVM target, only android + ios
@@ -21,7 +21,11 @@ class KotlinMultiplatformMobileConventionPlugin : Plugin<Project> {
                 applyDefaultHierarchyTemplate()
 
                 if (pluginManager.hasPlugin("com.android.library")) {
-                    this.configureAndroidTarget()
+                    androidTarget {
+                        compilerOptions {
+                            jvmTarget.set(JvmTarget.fromTarget((libs.versions.jvmTarget.get())))
+                        }
+                    }
                 }
             }
             configureKotlin()
