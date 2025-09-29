@@ -1,18 +1,6 @@
 package io.github.kalinjul.convention.config
 
-import org.gradle.api.JavaVersion
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import io.github.kalinjul.convention.libs
-
-fun KotlinMultiplatformExtension.configureAndroidTarget() {
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = JavaVersion.toVersion(project.libs.versions.jvmTarget.get()).toString()
-            }
-        }
-    }
-}
 
 fun KotlinMultiplatformExtension.configureIosTargets(baseName: String? = null) {
     listOf(
