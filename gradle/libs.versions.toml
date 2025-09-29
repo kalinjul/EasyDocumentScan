@@ -20,7 +20,7 @@ androidxActivity = "1.11.0"
 androidxAppCompat = "1.7.1"
 coreKtx = "1.17.0"
 
-dokka = "1.9.20"
+dokka = "2.0.0"
 nexus-publish-plugin = "2.0.0"
 mlkit-document-scanner = "16.0.0-beta1"
 
