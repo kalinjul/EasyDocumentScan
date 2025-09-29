@@ -33,7 +33,8 @@ class MavenCentralPublishConventionPlugin : Plugin<Project> {
 
             val javadocJar = tasks.register("javadocJar", Jar::class.java) {
                 archiveClassifier.set("javadoc")
-                from(tasks.getByName("dokkaHtml"))
+                from(tasks.getByName("dokkaGeneratePublicationHtml"))
+//                from(tasks.getByName("dokkaGeneratePublicationJavadoc"))
             }
 
             extensions.configure<PublishingExtension> {
