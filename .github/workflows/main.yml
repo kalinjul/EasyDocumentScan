@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/workflows/actions/build
@@ -35,7 +35,7 @@ jobs:
   deploy-snapshot:
     needs: [ build ]
     if: github.ref == 'refs/heads/main'
-    runs-on: macos-14
+    runs-on: macos-15
 
     steps:
       - uses: actions/checkout@v4
