@@ -18,7 +18,8 @@ dependencyResolutionManagement {
 
 rootProject.name="EasyDocumentScan"
 
-include(":documentscanner")
+include(":documentscanner-core")
+include(":documentscanner-compose")
 include(":sample-app:shared")
 include(":sample-app:android-app")
 
