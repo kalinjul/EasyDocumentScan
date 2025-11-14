@@ -22,7 +22,7 @@ coreKtx = "1.17.0"
 
 dokka = "2.0.0"
 nexus-publish-plugin = "2.0.0"
-mlkit-document-scanner = "16.0.0-beta1"
+mlkit-document-scanner = "16.0.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
