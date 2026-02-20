@@ -5,17 +5,17 @@ minSdk = "24" # required for exif interface
 
 jvmTarget = "17"
 # https://developer.android.com/build/releases/gradle-plugin#compatibility
-agp = "8.11.1"
+agp = "8.13.0"
 
 #https://github.com/JetBrains/compose-multiplatform
-compose-multiplatform = "1.9.0"
+compose-multiplatform = "1.10.1"
 #https://kotlinlang.org/docs/multiplatform-compatibility-guide.html
-kotlin = "2.2.20"
+kotlin = "2.2.21"
 # https://github.com/google/ksp
-ksp = "2.2.20-2.0.3"
+ksp = "2.3.4"
 
 # https://developer.android.com/jetpack/androidx/releases/activity
-androidxActivity = "1.11.0"
+androidxActivity = "1.12.4"
 # https://developer.android.com/jetpack/androidx/releases/appcompat
 androidxAppCompat = "1.7.1"
 coreKtx = "1.17.0"
@@ -29,6 +29,10 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppCompat" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 mlkit-documentscanner = { module = "com.google.android.gms:play-services-mlkit-document-scanner", version.ref = "mlkit-document-scanner" }
+
+# compose
+compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose-multiplatform" }
+compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose-multiplatform" }
 
 # Build logic dependencies
 android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }

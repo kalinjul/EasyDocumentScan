@@ -14,20 +14,21 @@ Supported Compose versions:
 | 0.1.0+                   | 1.7             |
 | 0.2.0+                   | 1.8             |
 | 0.3.0+                   | 1.9             |
+| 0.4.0+                   | 1.10            |
 
 # Dependency
 > [!NOTE]
-> Artifact id changed from "documentscanner" to "documentscanner-compose" and a new "documentscanner-core" artifact was introduced with 0.3.2 that contains the KmpFile abstraction as well as some Helper functions.
+> Starting with 0.3.2, artifact id changed from "documentscanner" to "documentscanner-compose" and a new "documentscanner-core" artifact was introduced that contains the KmpFile abstraction as well as some Helper functions.
 
 Add the dependency to your commonMain sourceSet (KMP) / Android dependencies (android only):
 ```kotlin
-implementation("io.github.kalinjul.easydocumentscan:documentscanner-compose:0.3.2")
+implementation("io.github.kalinjul.easydocumentscan:documentscanner-compose:0.4.0")
 ```
 
 Or, for your libs.versions.toml:
 ```toml
 [versions]
-easydocumentscanner = "0.3.2"
+easydocumentscanner = "0.4.0"
 [libraries]
 easydocumentscanner-compose = { module = "io.github.kalinjul.easydocumentscan:documentscanner-compose", version.ref = "easydocumentscanner" }
 easydocumentscanner-core = { module = "io.github.kalinjul.easydocumentscan:documentscanner-core", version.ref = "easydocumentscanner" }
