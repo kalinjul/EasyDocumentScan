@@ -14,10 +14,11 @@ Supported Compose versions:
 | 0.1.0+                   | 1.7             |
 | 0.2.0+                   | 1.8             |
 | 0.3.0+                   | 1.9             |
+| 0.4.0+                   | 1.10            |
 
 # Dependency
 > [!NOTE]
-> Artifact id changed from "documentscanner" to "documentscanner-compose" and a new "documentscanner-core" artifact was introduced with 0.3.2 that contains the KmpFile abstraction as well as some Helper functions.
+> Starting with 0.3.2, artifact id changed from "documentscanner" to "documentscanner-compose" and a new "documentscanner-core" artifact was introduced that contains the KmpFile abstraction as well as some Helper functions.
 
 Add the dependency to your commonMain sourceSet (KMP) / Android dependencies (android only):
 ```kotlin

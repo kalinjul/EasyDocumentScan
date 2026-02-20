@@ -23,8 +23,8 @@ kotlin {
         commonMain {
             dependencies {
                 api(projects.documentscannerCore)
-                implementation(compose.runtime)
-                implementation(compose.foundation)
+                implementation(libs.compose.runtime)
+                implementation(libs.compose.foundation)
             }
         }
 
