@@ -61,6 +61,7 @@ actual fun rememberDocumentScanner(
         }
 
         private fun VNDocumentCameraViewController.setManualMode() {
+            // iOS < 26
             val autoButton = view.findChild {
                 it.hasChild {
                     val text = (it as? UILabel)?.text
@@ -68,6 +69,16 @@ actual fun rememberDocumentScanner(
                 } != null
             }
             (autoButton as? UIButton)?.sendActionsForControlEvents(UIControlEventTouchUpInside)
+
+            // iOS 26
+            val shutterButton = view.findChild {
+                it.hasChild {
+                    val text = (it as? UILabel)?.text
+                    text == "Shutter" || text == "Verschluss"
+                } != null
+            }
+
+            (shutterButton?.subviews?.firstOrNull() as? UIButton)?.sendActionsForControlEvents(UIControlEventTouchUpInside)
         }
     }
 }
@@ -91,11 +102,11 @@ private fun UIView.findChildren(predicate: (UIView) -> Boolean): List<UIView> {
 private fun UIView.findChild(predicate: (UIView) -> Boolean): UIView? {
     subviews.forEach {
         val view:UIView? = it as? UIView
-        when(view) {
-            is UIButton -> println(view)
-            is UILabel -> println(view.text)
-            else -> println(view)
-        }
+//        when(view) {
+//            is UIButton -> println(view)
+//            is UILabel -> println(view.text)
+//            else -> println(view)
+//        }
 
         if (view != null && predicate(view)) {
             return view
