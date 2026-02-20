@@ -7,13 +7,13 @@
 
 Document Scanner for Compose Multiplatform (Android/iOS) using [VNDocumentCameraViewController](https://developer.apple.com/documentation/visionkit/vndocumentcameraviewcontroller) on iOS and [MLKit Document scanner](https://developers.google.com/ml-kit/vision/doc-scanner) on Android.
 
-Supported Compose version:
+Supported Compose versions:
 
-| Compose version | EasyDocumentScan Version |
-|-----------------|--------------------------|
-| 1.7             | 0.1.0+                   |
-| 1.8             | 0.2.0+                   |
-| 1.9             | 0.3.0+                   |
+| EasyDocumentScan Version | Compose version |
+|--------------------------|-----------------|
+| 0.1.0+                   | 1.7             |
+| 0.2.0+                   | 1.8             |
+| 0.3.0+                   | 1.9             |
 
 # Dependency
 > [!NOTE]
