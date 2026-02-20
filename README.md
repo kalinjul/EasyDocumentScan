@@ -22,13 +22,13 @@ Supported Compose versions:
 
 Add the dependency to your commonMain sourceSet (KMP) / Android dependencies (android only):
 ```kotlin
-implementation("io.github.kalinjul.easydocumentscan:documentscanner-compose:0.3.2")
+implementation("io.github.kalinjul.easydocumentscan:documentscanner-compose:0.4.0")
 ```
 
 Or, for your libs.versions.toml:
 ```toml
 [versions]
-easydocumentscanner = "0.3.2"
+easydocumentscanner = "0.4.0"
 [libraries]
 easydocumentscanner-compose = { module = "io.github.kalinjul.easydocumentscan:documentscanner-compose", version.ref = "easydocumentscanner" }
 easydocumentscanner-core = { module = "io.github.kalinjul.easydocumentscan:documentscanner-core", version.ref = "easydocumentscanner" }
