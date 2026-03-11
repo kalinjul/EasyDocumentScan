@@ -5,7 +5,7 @@ minSdk = "24" # required for exif interface
 
 jvmTarget = "17"
 # https://developer.android.com/build/releases/gradle-plugin#compatibility
-agp = "8.13.0"
+agp = "9.0.1"
 
 #https://github.com/JetBrains/compose-multiplatform
 compose-multiplatform = "1.10.1"
@@ -43,7 +43,7 @@ dokka-gradlePlugin = { module = "org.jetbrains.dokka:org.jetbrains.dokka.gradle.
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-android-library = { id = "com.android.library", version.ref = "agp" }
+android-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

@@ -2,7 +2,6 @@ package io.github.kalinjul.convention
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.configurationcache.extensions.capitalized
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
@@ -48,3 +47,5 @@ private fun Project.addKspDependencyForAllTargets(
             }
     }
 }
+
+fun String.capitalized() = replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
