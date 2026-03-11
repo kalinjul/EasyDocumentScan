@@ -40,4 +40,11 @@ kotlin {
             }
         }
     }
+
+    android {
+        optimization {
+            consumerKeepRules.file(layout.projectDirectory.file("consumer-rules.pro").asFile)
+            consumerKeepRules.publish = true
+        }
+    }
 }

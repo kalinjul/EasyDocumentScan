@@ -22,12 +22,6 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     minSdk = libs.versions.minSdk.get().toInt()
                     compileSdk = libs.versions.compileSdk.get().toInt()
 
-
-                    optimization {
-                        consumerKeepRules.file(target.layout.projectDirectory.file("consumer-rules.pro").asFile)
-                        consumerKeepRules.publish = true
-                    }
-
                     namespace = "org.publicvalue.multiplatform.${project.name.replace("-", ".")}"
                 }
             }
