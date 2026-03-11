@@ -24,13 +24,11 @@ kotlin {
             dependencies {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
-//                implementation(compose.material3)
             }
         }
 
         androidMain {
             dependencies {
-                implementation(libs.mlkit.documentscanner)
                 implementation(libs.androidx.activity.compose)
             }
         }

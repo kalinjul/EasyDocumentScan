@@ -1,14 +1,12 @@
 package io.github.kalinjul.convention
 
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
-import com.android.build.gradle.LibraryExtension
 import io.github.kalinjul.convention.config.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import kotlin.text.get
 
 class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -26,6 +24,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
 
                     optimization {
+                        consumerKeepRules.file(target.layout.projectDirectory.file("consumer-rules.pro").asFile)
                         consumerKeepRules.publish = true
                     }
 
