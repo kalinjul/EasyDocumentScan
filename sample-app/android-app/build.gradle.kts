@@ -1,22 +1,6 @@
 plugins {
     id("io.github.kalinjul.convention.android.application")
-    id("io.github.kalinjul.convention.kotlin.multiplatform.mobile")
     id("io.github.kalinjul.convention.compose.multiplatform")
-}
-
-kotlin {
-    androidTarget()
-    sourceSets {
-        androidMain {
-            dependencies {
-                implementation(libs.androidx.activity.compose)
-                implementation(libs.androidx.core.ktx)
-                implementation(libs.androidx.appcompat)
-
-                implementation(projects.sampleApp.shared)
-            }
-        }
-    }
 }
 
 android {
@@ -27,4 +11,20 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
+
+    buildTypes {
+        debug {
+            isMinifyEnabled = true
+//            setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), ("proguard-rules.pro")))
+        }
+    }
+}
+
+
+dependencies {
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+
+    implementation(projects.sampleApp.shared)
 }

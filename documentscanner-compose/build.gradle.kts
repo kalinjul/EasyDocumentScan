@@ -4,8 +4,8 @@ import io.github.kalinjul.convention.config.configureIosTargets
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-    id("io.github.kalinjul.convention.android.library")
     id("io.github.kalinjul.convention.kotlin.multiplatform.mobile")
+    id("io.github.kalinjul.convention.android.library")
     id("io.github.kalinjul.convention.centralPublish")
     id("io.github.kalinjul.convention.compose.multiplatform")
 }

@@ -20,7 +20,7 @@ class KotlinMultiplatformMobileConventionPlugin : Plugin<Project> {
             extensions.configure<KotlinMultiplatformExtension> {
                 applyDefaultHierarchyTemplate()
 
-                if (pluginManager.hasPlugin("com.android.library")) {
+                if (pluginManager.hasPlugin("com.android.kotlin.multiplatform.library")) {
                     androidTarget {
                         compilerOptions {
                             jvmTarget.set(JvmTarget.fromTarget((libs.versions.jvmTarget.get())))
