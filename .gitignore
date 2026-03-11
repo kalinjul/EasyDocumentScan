@@ -3,3 +3,4 @@
 .kotlin
 .gradle
 .DS_Store
+**/DerivedData
