@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.uikit.LocalUIView
 import androidx.compose.ui.uikit.LocalUIViewController
 import platform.AVFoundation.AVErrorApplicationIsNotAuthorizedToUseDevice
 import platform.UIKit.UIButton
@@ -19,7 +20,7 @@ actual fun rememberDocumentScanner(
     options: DocumentScannerOptions
 ): DocumentScanner {
 
-    val localViewController = LocalUIViewController.current
+    val localUiView = LocalUIView.current
 
     var delegate by remember() { mutableStateOf<DocumentScannerDelegate?>(null) }
 
@@ -37,7 +38,7 @@ actual fun rememberDocumentScanner(
                         onResult(Result.failure(exception))
                     },
                     onCancel = {
-                        controller.dismissViewControllerAnimated(true) {}
+                        controller.dismissModalViewControllerAnimated(false)
                     },
                     onResult = { result ->
                         controller.dismissViewControllerAnimated(true) {}
@@ -53,7 +54,8 @@ actual fun rememberDocumentScanner(
                     delegate = it // need to remember delegate else it is dereferenced
                 }
             )
-            localViewController.presentViewController(controller, animated = true) {
+            val viewController = localUiView.window?.rootViewController
+            viewController?.presentViewController(controller, animated = true) {
                 if (options.ios.captureMode == DocumentCaptureMode.MANUAL) {
                     controller.setManualMode()
                 }
