@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.uikit.LocalUIView
 import androidx.compose.ui.uikit.LocalUIViewController
 import platform.AVFoundation.AVErrorApplicationIsNotAuthorizedToUseDevice
 import platform.UIKit.UIButton
@@ -19,7 +20,7 @@ actual fun rememberDocumentScanner(
     options: DocumentScannerOptions
 ): DocumentScanner {
 
-    val localViewController = LocalUIViewController.current
+    val localUiView = LocalUIView.current
 
     var delegate by remember() { mutableStateOf<DocumentScannerDelegate?>(null) }
 
@@ -29,7 +30,7 @@ actual fun rememberDocumentScanner(
             controller.setDelegate(
                 DocumentScannerDelegate(
                     onError = {
-                        controller.dismissViewControllerAnimated(true) {}
+                        controller.dismissViewControllerAnimated(false) {}
                         val exception = when(it.code) {
                             AVErrorApplicationIsNotAuthorizedToUseDevice -> DocumentScannerException.NotAuthorized(it.localizedDescription)
                             else -> DocumentScannerException.Unknown(it.localizedDescription)
@@ -37,11 +38,11 @@ actual fun rememberDocumentScanner(
                         onResult(Result.failure(exception))
                     },
                     onCancel = {
-                        controller.dismissViewControllerAnimated(true) {}
+                        controller.dismissViewControllerAnimated(false) {}
                         onResult(Result.failure(DocumentScannerException.Canceled(message = null)))
                     },
                     onResult = { result ->
-                        controller.dismissViewControllerAnimated(true) {}
+                        controller.dismissViewControllerAnimated(false) {}
 
                         val documents = (0..< result.pageCount.toInt()).map {
                             val image = result.imageOfPageAtIndex(it.toULong())
@@ -54,7 +55,8 @@ actual fun rememberDocumentScanner(
                     delegate = it // need to remember delegate else it is dereferenced
                 }
             )
-            localViewController.presentViewController(controller, animated = true) {
+            val viewController = localUiView.window?.rootViewController
+            viewController?.presentViewController(controller, animated = true) {
                 if (options.ios.captureMode == DocumentCaptureMode.MANUAL) {
                     controller.setManualMode()
                 }
