@@ -30,7 +30,7 @@ actual fun rememberDocumentScanner(
             controller.setDelegate(
                 DocumentScannerDelegate(
                     onError = {
-                        controller.dismissViewControllerAnimated(true) {}
+                        controller.dismissViewControllerAnimated(false) {}
                         val exception = when(it.code) {
                             AVErrorApplicationIsNotAuthorizedToUseDevice -> DocumentScannerException.NotAuthorized(it.localizedDescription)
                             else -> DocumentScannerException.Unknown(it.localizedDescription)
@@ -38,10 +38,10 @@ actual fun rememberDocumentScanner(
                         onResult(Result.failure(exception))
                     },
                     onCancel = {
-                        controller.dismissModalViewControllerAnimated(false)
+                        controller.dismissViewControllerAnimated(false) {}
                     },
                     onResult = { result ->
-                        controller.dismissViewControllerAnimated(true) {}
+                        controller.dismissViewControllerAnimated(false) {}
 
                         val documents = (0..< result.pageCount.toInt()).map {
                             val image = result.imageOfPageAtIndex(it.toULong())
