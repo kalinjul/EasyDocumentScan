@@ -1,5 +1,6 @@
 package io.github.kalinjul.easydocumentscan
 
+import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.content.IntentSender
 import android.util.Log
@@ -54,6 +55,10 @@ actual fun rememberDocumentScanner(
 //                println("PDF: $pdfUri")
 //                onScanned(pdfUri.toString())
 //            }
+        } else if(result.resultCode == RESULT_CANCELED) {
+            onResult(Result.failure(DocumentScannerException.Canceled(message = null)))
+        } else {
+            onResult(Result.failure(DocumentScannerException.Unknown("Unknown activity result code: ${result.resultCode}")))
         }
     }
 

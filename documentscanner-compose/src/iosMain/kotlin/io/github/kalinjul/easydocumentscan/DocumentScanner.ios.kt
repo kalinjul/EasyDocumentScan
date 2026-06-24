@@ -39,6 +39,7 @@ actual fun rememberDocumentScanner(
                     },
                     onCancel = {
                         controller.dismissViewControllerAnimated(false) {}
+                        onResult(Result.failure(DocumentScannerException.Canceled(message = null)))
                     },
                     onResult = { result ->
                         controller.dismissViewControllerAnimated(false) {}
